@@ -1,0 +1,29 @@
+<html>
+
+    <head>
+      <title>Aplicación wef Filtro en tiempo real usando red neuronal PoseNet </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+    
+        <link rel="stylesheet" type="text/css" href="style.css">
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.0.0/p5.js"></script>
+      <script src="https://unpkg.com/ml5@0.4.3/dist/ml5.min.js"></script>
+    
+    </head>
+    
+    <body background="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBxQTEhUTExAVFhUSFhUSGBUWFxAVFRUVFRcWGBUSFRUYHiggGBolGxYWITEhJSkrLi4uFx8zODMtNygtLisBCgoKDg0OFxAPFSsdHR0rLS0rKy0rLSstLS0tLS0tLS0tKy03Ny0tLSsrNzctNystLTc3Ky0rKystLSsrKzcrK//AABEIAMIBAwMBIgACEQEDEQH/xAAcAAEAAQUBAQAAAAAAAAAAAAAAAQIDBAUGBwj/xAA3EAACAQIEBQIEBQMDBQAAAAAAAQIDEQQSITEFBkFRYXGBEyKRoQcywdHwQrHxFGLhFRZSU5L/xAAXAQEBAQEAAAAAAAAAAAAAAAAAAQID/8QAGxEBAQEAAgMAAAAAAAAAAAAAAAERITECQVH/2gAMAwEAAhEDEQA/APDQSAIBIAgEgCASAIBIAgEgCASAIBIAgEgCASAIBIAgEgCASAIBIAgEgCASAIBJAEgAAAAAAAAAAAAAAAAAACbDKBAKsjIsXBAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABKQEEorVIuQplFVKF9DI/0xFFK6O84Jy78WmpKIK4aWEMKrE7bmTBqgtY26HI1UnqCMCwMiVModLyUWgS0QZAAAAAAAAAAAAAAAAAAAAAAAAAAACVF9iDsuEcvZ6cXbeKf1LByEabfQ2HD8FKpPJTim/PbudNX5WqJNxi35RhYTh2IoybV0/7rzcUi5S5ZhZZsTTg5fkjN2dRZlBSir7NvTd212uW8dwDJDNFv5W4yi9WpJ2aWmv7Gxo/P8N1KClKjZQknNbSzJSS0kk+jLmJnVlmV380nN2VtZO5Gq0HC+Fyq1YQjrd6+F1bPduAcOUKSilolY4/kLlxwvWmnror9j1HAYRqF7FrFrzP8RuBZ6TlDda2723S9jymhh3OSgtG9Lfue984Umo+DyriHD3Cq5xT1101BKoo8AoxTzzjGyi51Kl8qc21GKW2tt3tp7YFbhtGUbwek4ucJpON7O0lKPRptGwdSo1LPFSU0otSWjUXeOi6ps12LzWSjljGKypJNJK97fUnLTna1O2ltUWFE3MeFzk9E356GfDgTgrvqaHLtEGRjqeWcl2ZjmagAAAAAAAAAAAAAAAAAAAAAAqgikC9haOaVj37lrhcfgU1a3yx/sjwfh1Jykkt7r2V9z6Q5Zp2pQX/jGP8AZFGfQ4dFK1vaxkLlynJawXe9kzY4emr3/wAGxpx0JajmP+1aPVbdCqjytQTvkT6nQV4/UilCxNGjqUFFOytFfyxt8Hi4ZFfqjz3nnnVYem4xpt3e9+5zvDuf/iQvZpx0a6/4LiR13PeOhGOW+/Q0mD4drByjmjNLbz0ZxPMfNLnJSab8bG+4RzbnpQeR2TSu2uj1QWu5fLtLdQMPFcGpr+lfRHYqCdNSWzSkmtU7moxdtiypXF4/BKO0V9EaLHROv4nDdHJcU0uaqR51zFG1Z+Umas23HpZp6dEakzWwAEAAAAAAAAAAAAAAAAAAAACbFG95Pp5sRBNXT6d9v8+x7/wqdvY8E5RmoV4O3i/l2/S57pwqqmovo7X23sUdrgFdI2cImv4b+VelynGcVjDqn+/g50xnVqSaMNPKc/j+b4K9mvr9DS1Oce1uxcMYGL5Uq1a04VacZ0pNu7lG1m+nVMp4v+HFOFO9FKDSS6tP33XqWsVzll/NJK2vRGrx/P8AObUIzsreE+2zNcmMCPIU381RxtrZL9X+xfjyrKSjTjVpwgtP621fqlZJv3LGJ5vnH5W/iJ65Vumk7bdNjCp81056u8X23sNJNesYLiipwjSTdoKME3rolZXLeJxib0t7HmK5ij/7EvV299TIp8b659H1vdELHaYjLI5PmGhZNpF7DcVU1eMtfsy1xKrmi77mmb4vMeIx0lLu7ehqDecWklTa/wB1vo/+DRkrQACAAAAAAAAAAAAAAABAX1R+RSfVv1t/ksMzcRVzbJJKKsu27t9zDSKJy6XL2Gaum9lf620KJ1G0o9Fe3jvqS1ppstAOm5amm9VZ6a9D1zl6d6a66/c+fqGKlB3jJp+D1z8N+K56EVKXzXcX6rr7qwK9QxfEslL5evnpbVfc835h5ks2nUS3W9/TTojp+L126Ta7HgfGqjjWqJrVyf8AEMWV0mM5gunaT6q+ttOtjT1eOytZOT97GhdRsrjJA1nz4pN/1L1sr/Vl+HEcQ4NxnNwi03opRTezd1a/kx6GNUJ05JKXw2pfl3s81pJ76/VF6PEl8OaTyqcszir6vvbwQWKtSpJXblZ32uovvotDGSbdkm2+i1bM/EcRWTInpa1vXW31ZFbjF2pQhkeT4bcXayyKF1brbT3Eo1sqj637CliZR/K7ehFeqn69+/kslRu+E8dqQnHZptJrr63O8nVzQzLZnmuAoXkvB20qmWkr6aIFchx2pebV9mzVmRj6mapJ+WY4oAAgAAAAAAAAAAAAAAAAqTAZBoCqoQkEhgiKO4/D7GZXUg3bWM122s/7I4pRNpwjGfCqxlfTZ+jA9qwWOU4OLT0TXnzoeYc8cLy1XLo9DoIcTySjK6yytr/Nrm/4nw2GMo6b2vol6ryWdI8QlBp6g3mNwXwajhWg2ldb230Utuhh1uG21zXjpaS1Tv56e5lWvTFzNx2CVOcoZ82VrWLTVmk7X767lr/TXa3Sb38AY1yGzKdCKzb6aa6N+hQqKvu9UunXqtwMcyIUbRzS6/lXfyVygo7r28FWGpurNLW22nRdgNty7gnOSvtuZnMeNy/KtNH/AD7G4dGOGoXekrXfhdDgcdinOTbd+3oBjtkAEAAAAAAAAAAAAAAAAAmG5BXTjqBVbUOJNtS5Y0q1bQqUbEpACkuQZQTcDo+G8RUofCqekX47eqOr5Q446U40amqbWWb3Xa/g81UjecG4im1Co9f6ZNv+XIPS+dOU1iYfFhH50ru19fJ5FWjVw7cZLTzse+cjcSVWnknJOUV4u/Nn7mw43yNh8WtVlb8Jo1wj54wdKlWtHMqcurbdn6djJ/6FJStnvpm0tte2/c77i34NVL3ozV+2tv8Ag1E/w2x9PZy/+mv0M58I5mPBllzSk092n201099zV4ucIu0NX3O4h+HmLlpL7yb0+hucD+Ful6kre23uy4ryjDYaVSXXX9T0rlPlfIlOcbdUn/f1Ot4LydQozSy5n09tdO5ncWqRownLtovuJEeSfiLjPnjSWy+Z/ov1OKNnzDjfjV5z7uy9F/L+5rBQABkAAAAAAAAAAAAAAAADIox09SxFamYogW7alTEkLmlRYpZWRYClIEspAqiyrJfrsW0XEB1fJfNboVY527LR62unvbs/Q+heE8ShVpKcZXUkno9eh8m1o9UdbyTz/VwbUZOUqT0aT1XlJ6P+MnsfScqmqaennRryXKmIcVtp6Nr10OH4XzTRxMU6dVO+6zJWbu7O2x0eDxma2bK8vX93t7Gu01lzcm7KNl3toYuLg1v/ABX8dRi+NKOmnXVXb+xyXHeeKdO+WUdrNtx+qi9Xo9ijZY/Ewg/zfMnrbW199jzD8SeZE4/ChLWb1tpaK8/Q1HHud5Tcskrt9f1b6nF4ivKcs0m233M2ihgIggAAgAAAAAAAAAAAAAAAArorUy4mJSlZmVFFESC2JaCCqQ2TYgCCloqZEiopuVxLbJgwq5cx6kdTItoUSILdGvKDvGTi+6bT+xu8DzhiqSsqrkv9zk/ve5opRKRqOhxnOOJqKznvva+u/R+ppK+JnN3lJttt692WQNABIqURBBBLIFAAEAAAAAAAAAAAAAABAAkv066S1uY4AyXiF2f2H+oXYxgBkOuuzI+MuxYAF/4y7EfFLILouuoPieC0BovfG8D4qLIGi78QttkAgkEACtSRLmWwBLYIAEggASCABIIAEggASCABIIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB//Z">
+    <center>
+      <h3 class="btn btn-info">Filtro en tiempo real</h3>
+      <br><br>
+      <button onclick="take_snapshot()" class="btn btn-success">Toma una instantánea</button>
+    </center>
+    
+    <script src="main.js"></script>
+    
+    </body>
+    
+    </html>
+    
